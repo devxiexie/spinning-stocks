@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+}
+
+#container {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+#result {
+    margin-top: 1%;
+    border: 1px black dotted;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#button {
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,3 +1,4 @@
+// https://github.com/olimorris/spin-the-wheel/blob/main/src/index.js
 sectors = [
     { color: "red", text: "#333333", label: "one" },
     { color: "orange", text: "#333333", label: "two" },
@@ -15,8 +16,9 @@ var spinEl = document.querySelector("#button");
 var output = document.querySelector("#result");
 var pi = Math.PI;
 var arcRadians = (2 * pi) / 8;
+var randButton = document.querySelector("#randomize");
 
-const friction = 0.95;
+const friction = 0.99;
 
 var angularVelocity = 0;
 var ang = 0;
@@ -73,6 +75,18 @@ function frame() {
     requestAnimationFrame(frame);
 }
 
+function shuffleLabels() {
+    var labels = sectors.map((sector) => sector.label);
+    for (let i = labels.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        [labels[i], labels[j]] = [labels[j], labels[i]];
+    }
+    sectors.forEach((sector, index) => {
+        sector.label = labels[index];
+    });
+    console.log(sectors);
+}
+
 function execute() {
     var i = 0;
     do {
@@ -82,9 +96,22 @@ function execute() {
 
     rotate();
     frame();
+    randButton.addEventListener("click", () => {
+        if (!angularVelocity) {
+            shuffleLabels();
+            var i = 0;
+            do {
+                drawSector(sectors[i], i);
+                i++;
+            } while (i < 8);
+        }
+    });
+
     spinEl.addEventListener("click", () => {
-        if (!angularVelocity)
-            angularVelocity = Math.random() * (1 - 0.25) + 0.25;
+        if (!angularVelocity) {
+            angularVelocity = Math.random() * (1 - 0.0) + 0.0;
+        }
+
         startedSpinning = true;
     });
 }
